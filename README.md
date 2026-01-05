@@ -1,4 +1,4 @@
-Some of The Most Important SQL Commands
+<h1>Some of The Most Important SQL Commands</h1>
 
 SELECT - extracts data from a database
 UPDATE - updates data in a database
