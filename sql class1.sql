@@ -34,6 +34,8 @@ MariaDB [student]> create table marksheet(
     -> );
 Query OK, 0 rows affected (0.143 sec)
 
+	//how to display a table
+	
 MariaDB [student]> describe marksheet
     -> ;
 +----------------+-------------+------+-----+---------+-------+
@@ -251,4 +253,5 @@ MariaDB [student]> describe marksheet;
 | average_marks  | double      | NO   |     | NULL    |       |
 | Submisson_date | date        | YES  |     | NULL    |       |
 +----------------+-------------+------+-----+---------+-------+
+
 7 rows in set (0.040 sec)
