@@ -125,3 +125,46 @@ MariaDB [details]> select * from Student_Marks ;
 +------+-------+
 4 rows in set (0.000 sec)
 
+=================================================================================================================
+
+###########To sort bt asending order####################
+MariaDB [pscompany]> select * from Suppliers order by name asc;
++-----------+-------------+----------+
+| SuplierID | Name        | Phone    |
++-----------+-------------+----------+
+|       501 | ABC Traders | 88881111 |
+|       505 | MN Traders  | 88885555 |
+|       503 | QQ Corp     | 88883333 |
+|       504 | RK Groups   | 88883333 |
+|       502 | XYZ Company | 88882222 |
++-----------+-------------+----------+
+5 rows in set (0.001 sec)
+
+############To sort by desending Order ###############################################
+
+MariaDB [pscompany]> select * from Suppliers order by name desc;
++-----------+-------------+----------+
+| SuplierID | Name        | Phone    |
++-----------+-------------+----------+
+|       502 | XYZ Company | 88882222 |
+|       504 | RK Groups   | 88883333 |
+|       503 | QQ Corp     | 88883333 |
+|       505 | MN Traders  | 88885555 |
+|       501 | ABC Traders | 88881111 |
++-----------+-------------+----------+
+5 rows in set (0.001 sec)
+
+################ How to change colum name ############
+
+MariaDB [pscompany]> select phone as phone_number from suppliers ;
++--------------+
+| phone_number |
++--------------+
+| 88881111     |
+| 88882222     |
+| 88883333     |
+| 88883333     |
+| 88885555     |
++--------------+
+5 rows in set (0.002 sec)
+
