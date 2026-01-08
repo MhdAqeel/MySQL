@@ -168,3 +168,206 @@ MariaDB [pscompany]> select phone as phone_number from suppliers ;
 +--------------+
 5 rows in set (0.002 sec)
 
+MariaDB [pscompany]> create database World ;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [pscompany]> use world ;
+Database changed
+
+MariaDB [world]> create table country(
+    -> code int(25) not null primary key,
+    -> name varchar(25) not null,
+    -> continent varchar(30) not null,
+    -> region varchar(30) not null,
+    -> population int(50) not null
+    -> ) ;
+Query OK, 0 rows affected (0.112 sec)
+
+MariaDB [world]> describe country ;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| code       | int(25)     | NO   | PRI | NULL    |       |
+| name       | varchar(25) | NO   |     | NULL    |       |
+| continent  | varchar(30) | NO   |     | NULL    |       |
+| region     | varchar(30) | NO   |     | NULL    |       |
+| population | int(50)     | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.014 sec)
+
+MariaDB [world]> insert into country (code , name , continent , region , population )
+    -> values
+    -> (94,"Sri Lanka" , "Asia" , "South Asia" , 150000),
+    -> (91,"India" , "Asia" , "South Asia" , 22311231),
+    -> (1,"Canada" , "America" , "North America" , 1000000)
+    -> ;
+Query OK, 3 rows affected (0.043 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [world]> select * from country ;
++------+-----------+-----------+---------------+------------+
+| code | name      | continent | region        | population |
++------+-----------+-----------+---------------+------------+
+|    1 | Canada    | America   | North America |    1000000 |
+|   91 | India     | Asia      | South Asia    |   22311231 |
+|   94 | Sri Lanka | Asia      | South Asia    |     150000 |
++------+-----------+-----------+---------------+------------+
+3 rows in set (0.000 sec)
+
+##########################   String pattern Matching #####################################
+
+MariaDB [world]> use pscompany
+Database changed
+MariaDB [pscompany]> select name,price from products where name like 'pencil%';
++-----------+-------+
+| name      | price |
++-----------+-------+
+| Pencil 2B |  0.48 |
+| Pencil 2B |  0.48 |
+| Pencil 3B |  0.52 |
+| Pencil 4B |  0.62 |
+| Pencil 5B |  0.73 |
+| Pencil 6B |  0.47 |
++-----------+-------+
+6 rows in set (0.001 sec)
+
+MariaDB [pscompany]> select name, quantity from products where  quantity>=5000 ;
++-----------+----------+
+| name      | quantity |
++-----------+----------+
+| Pen Red   |     5000 |
+| Pen Blue  |     8000 |
+| Pencil 2B |    10000 |
+| Pencil 2B |    10000 |
++-----------+----------+
+4 rows in set (0.001 sec)
+
+MariaDB [pscompany]> select name, price from products where  price<0.5 ;
++-----------+-------+
+| name      | price |
++-----------+-------+
+| Pencil 2B |  0.48 |
+| Pencil 2B |  0.48 |
+| Pencil 6B |  0.47 |
++-----------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [pscompany]> select name, quantity from products where  quantity>=5000 and name like 'pen %' ;
++----------+----------+
+| name     | quantity |
++----------+----------+
+| Pen Red  |     5000 |
+| Pen Blue |     8000 |
++----------+----------+
+2 rows in set (0.001 sec)
+
+MariaDB [pscompany]> select * from products where name in ('pen red' , 'pen black') ;
++------+------+-----------+----------+-------+
+| ID   | code | name      | quantity | price |
++------+------+-----------+----------+-------+
+| 1001 | PEN  | Pen Red   |     5000 |  1.23 |
+| 1003 | PEN  | Pen Black |     2000 |  1.25 |
++------+------+-----------+----------+-------+
+2 rows in set (0.001 sec)
+
+MariaDB [pscompany]> select * from products where name in ('pen red' , 'pen black') ;
++------+------+-----------+----------+-------+
+| ID   | code | name      | quantity | price |
++------+------+-----------+----------+-------+
+| 1001 | PEN  | Pen Red   |     5000 |  1.23 |
+| 1003 | PEN  | Pen Black |     2000 |  1.25 |
++------+------+-----------+----------+-------+
+2 rows in set (0.001 sec)
+
+MariaDB [pscompany]> select * from products where price between 1.25 and 2.0 ;
++------+------+-----------+----------+-------+
+| ID   | code | name      | quantity | price |
++------+------+-----------+----------+-------+
+| 1002 | PEN  | Pen Blue  |     8000 |  1.25 |
+| 1003 | PEN  | Pen Black |     2000 |  1.25 |
++------+------+-----------+----------+-------+
+2 rows in set (0.001 sec)
+
+    
+================================================================================
+
+    
+MariaDB [pscompany]> select * from products order by price limit 2 ;
++------+------+-----------+----------+-------+
+| ID   | code | name      | quantity | price |
++------+------+-----------+----------+-------+
+| 2004 | PEC  | Pencil 6B |      500 |  0.47 |
+| 1004 | PEC  | Pencil 2B |    10000 |  0.48 |
++------+------+-----------+----------+-------+
+2 rows in set (0.001 sec)
+
+MariaDB [pscompany]> select * from products order by code limit 5 ;
++------+------+-----------+----------+-------+
+| ID   | code | name      | quantity | price |
++------+------+-----------+----------+-------+
+| 1007 | PEC  | Pencil 4B |      200 |  0.62 |
+| 2003 | PEC  | Pencil 5B |      100 |  0.73 |
+| 2004 | PEC  | Pencil 6B |      500 |  0.47 |
+| 1004 | PEC  | Pencil 2B |    10000 |  0.48 |
+| 1005 | PEC  | Pencil 2B |    10000 |  0.48 |
++------+------+-----------+----------+-------+
+5 rows in set (0.001 sec)
+
+MariaDB [pscompany]> select * from products order by code limit 5 offset 2;
++------+------+-----------+----------+-------+
+| ID   | code | name      | quantity | price |
++------+------+-----------+----------+-------+
+| 1005 | PEC  | Pencil 2B |    10000 |  0.48 |
+| 1006 | PEC  | Pencil 3B |      500 |  0.52 |
+| 1007 | PEC  | Pencil 4B |      200 |  0.62 |
+| 2003 | PEC  | Pencil 5B |      100 |  0.73 |
+| 1002 | PEN  | Pen Blue  |     8000 |  1.25 |
++------+------+-----------+----------+-------+
+5 rows in set (0.001 sec)
+
+
+MariaDB [pscompany]> select count(*) from products ;
++----------+
+| count(*) |
++----------+
+|        9 |
++----------+
+1 row in set (0.001 sec)
+
+MariaDB [pscompany]> select count(*) from products where price>1.0;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.001 sec)
+
+
+MariaDB [pscompany]> select max(price),min(price) from products;
++------------+------------+
+| max(price) | min(price) |
++------------+------------+
+|       1.25 |       0.47 |
++------------+------------+
+1 row in set (0.001 sec)
+
+
+MariaDB [pscompany]> delete from products where ID=1005 ;
+Query OK, 1 row affected (0.073 sec)
+
+MariaDB [pscompany]> select * from products ;
++------+------+-----------+----------+-------+
+| ID   | code | name      | quantity | price |
++------+------+-----------+----------+-------+
+| 1001 | PEN  | Pen Red   |     5000 |  1.23 |
+| 1002 | PEN  | Pen Blue  |     8000 |  1.25 |
+| 1003 | PEN  | Pen Black |     2000 |  1.25 |
+| 1004 | PEC  | Pencil 2B |    10000 |  0.48 |
+| 1006 | PEC  | Pencil 3B |      500 |  0.52 |
+| 1007 | PEC  | Pencil 4B |      200 |  0.62 |
+| 2003 | PEC  | Pencil 5B |      100 |  0.73 |
+| 2004 | PEC  | Pencil 6B |      500 |  0.47 |
++------+------+-----------+----------+-------+
+8 rows in set (0.000 sec)
+
+
