@@ -371,3 +371,22 @@ MariaDB [pscompany]> select * from products ;
 8 rows in set (0.000 sec)
 
 
+MariaDB [pscompany]> update products set name="Pen Green" where ID=1003 ;
+Query OK, 1 row affected (0.044 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [pscompany]> select * from products ;
++------+------+-----------+----------+-------+
+| ID   | code | name      | quantity | price |
++------+------+-----------+----------+-------+
+| 1001 | PEN  | Pen Red   |     5000 |  1.23 |
+| 1002 | PEN  | Pen Blue  |     8000 |  1.25 |
+| 1003 | PEN  | Pen Green |     2000 |  1.25 |
+| 1004 | PEC  | Pencil 2B |    10000 |  0.48 |
+| 1006 | PEC  | Pencil 3B |      500 |  0.52 |
+| 1007 | PEC  | Pencil 4B |      200 |  0.62 |
+| 2003 | PEC  | Pencil 5B |      100 |  0.73 |
+| 2004 | PEC  | Pencil 6B |      500 |  0.47 |
++------+------+-----------+----------+-------+
+8 rows in set (0.000 sec)
+
