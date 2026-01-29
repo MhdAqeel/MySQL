@@ -108,3 +108,144 @@ MariaDB [sample]> select * from Supliers;
 +------------+-----------------+------------------+----------------+-------------+------------+---------+
 4 rows in set (0.000 sec)
 
+MariaDB [sample]> create database School;
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [sample]> use school;
+Database changed
+
+MariaDB [school]> create table Department(
+    -> DNum int not null,
+    -> DName varchar(30) not null,
+    -> StartDate date,
+    -> primary key(DNum));
+Query OK, 0 rows affected (0.117 sec)
+
+MariaDB [school]> create table Staff(
+    -> SSN int not null primary key,
+    -> FName varchar(30) not null,
+    -> LName varchar(30) not null,
+    -> Salary int not null,
+    -> DNum int not null,
+    -> FOREIGN KEY (DNum) REFERENCES Department(DNum));
+Query OK, 0 rows affected (0.144 sec)
+
+MariaDB [school]> load data local infile "C:/Users/dcsuser/Documents/2023csc099/department.txt" into table Department;
+Query OK, 3 rows affected (0.057 sec)
+Records: 3  Deleted: 0  Skipped: 0  Warnings: 0
+
+MariaDB [school]> load data local infile "C:/Users/dcsuser/Documents/2023csc099/Staff.txt" into table Staff;
+Query OK, 6 rows affected, 5 warnings (0.058 sec)
+Records: 6  Deleted: 0  Skipped: 0  Warnings: 5
+
+MariaDB [school]> select * from Staff
+    -> ;
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 12345 | Jerrish  | Sharan |  30000 |    5 |
+| 33445 | Dinith   | Wreck  |  40000 |    5 |
+| 53453 | Joy      | Dilan  |  25000 |    5 |
+| 66884 | Ramya    | Naresh |  38000 |    5 |
+| 87654 | Jennifer | Mercy  |  43000 |    5 |
+| 99887 | Alia     | Shed   |  25000 |    4 |
++-------+----------+--------+--------+------+
+6 rows in set (0.000 sec)
+
+MariaDB [school]> select * from Department;
++------+----------------+------------+
+| DNum | DName          | StartDate  |
++------+----------------+------------+
+|    1 | ELTU           | 1981-06-19 |
+|    4 | Administration | 1995-01-01 |
+|    5 | Research       | 1988-05-22 |
++------+----------------+------------+
+3 rows in set (0.000 sec)
+
+ 
+ 
+ ###################dispaly staff record ordered in salary asending order##########
+MariaDB [school]> select * from Staff order by Salary asc;
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 53453 | Joy      | Dilan  |  25000 |    5 |
+| 99887 | Alia     | Shed   |  25000 |    4 |
+| 12345 | Jerrish  | Sharan |  30000 |    5 |
+| 66884 | Ramya    | Naresh |  38000 |    5 |
+| 33445 | Dinith   | Wreck  |  40000 |    5 |
+| 87654 | Jennifer | Mercy  |  43000 |    5 |
++-------+----------+--------+--------+------+
+6 rows in set (0.001 sec)
+
+ 
+ 
+ ######################last name desendinf order######################################
+MariaDB [school]> select * from Staff order by LName dsc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'dsc' at line 1
+MariaDB [school]> select * from Staff order by LName desc;
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 33445 | Dinith   | Wreck  |  40000 |    5 |
+| 99887 | Alia     | Shed   |  25000 |    4 |
+| 12345 | Jerrish  | Sharan |  30000 |    5 |
+| 66884 | Ramya    | Naresh |  38000 |    5 |
+| 87654 | Jennifer | Mercy  |  43000 |    5 |
+| 53453 | Joy      | Dilan  |  25000 |    5 |
++-------+----------+--------+--------+------+
+6 rows in set (0.000 sec)
+
+##############order by department name and salary#############
+ 
+ MariaDB [school]> select * from Staff order by
+    -> Salary asc , DNum asc ;
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 99887 | Alia     | Shed   |  25000 |    4 |
+| 53453 | Joy      | Dilan  |  25000 |    5 |
+| 12345 | Jerrish  | Sharan |  30000 |    5 |
+| 66884 | Ramya    | Naresh |  38000 |    5 |
+| 33445 | Dinith   | Wreck  |  40000 |    5 |
+| 87654 | Jennifer | Mercy  |  43000 |    5 |
++-------+----------+--------+--------+------+
+6 rows in set (0.001 sec)
+
+
+##################distinct department numbers from staff table###############
+MariaDB [school]> select distinct DNum from Staff;
++------+
+| DNum |
++------+
+|    4 |
+|    5 |
++------+
+2 rows in set (0.000 sec)
+
+MariaDB [school]> select distinct Salary from Staff;
++--------+
+| Salary |
++--------+
+|  30000 |
+|  40000 |
+|  25000 |
+|  38000 |
+|  43000 |
++--------+
+5 rows in set (0.001 sec)
+
+###############dispaly staff full name along with salary ina single column###################
+ 
+MariaDB [school]> SELECT CONCAT(FName, ' ', LName, ' - ', Salary) AS Staff_Details
+    -> FROM Staff;
++------------------------+
+| Staff_Details          |
++------------------------+
+| Jerrish Sharan - 30000 |
+| Dinith Wreck - 40000   |
+| Joy Dilan - 25000      |
+| Ramya Naresh - 38000   |
+| Jennifer Mercy - 43000 |
+| Alia Shed - 25000      |
++------------------------+
