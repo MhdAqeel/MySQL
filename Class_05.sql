@@ -323,4 +323,38 @@ MariaDB [School]> SELECT *
 +-------+---------+--------+--------+------+
 5 rows in set (0.001 sec)
 
-################### 
+################### find the second highest salary from staff table####################
+MariaDB [School]> SELECT MAX(Salary) AS Second_Highest_Salary
+    -> FROM Staff
+    -> WHERE Salary < (SELECT MAX(Salary) FROM Staff);
++-----------------------+
+| Second_Highest_Salary |
++-----------------------+
+|                 40000 |
++-----------------------+
+1 row in set (0.039 sec)
+
+ MariaDB [School]> select * from Staff order by Salary desc limit 1 offset 1;
++-------+--------+-------+--------+------+
+| SSN   | FName  | LName | Salary | DNum |
++-------+--------+-------+--------+------+
+| 33445 | Dinith | Wreck |  40000 |    5 |
++-------+--------+-------+--------+------+
+1 row in set (0.008 sec)
+
+###################dispaly staff details who earns the same salary###################
+MariaDB [School]> SELECT *
+    -> FROM Staff
+    -> WHERE Salary IN (
+    ->     SELECT Salary
+    ->     FROM Staff
+    ->     GROUP BY Salary
+    ->     HAVING COUNT(*) > 1
+    -> );
++-------+-------+-------+--------+------+
+| SSN   | FName | LName | Salary | DNum |
++-------+-------+-------+--------+------+
+| 53453 | Joy   | Dilan |  25000 |    5 |
+| 99887 | Alia  | Shed  |  25000 |    4 |
++-------+-------+-------+--------+------+
+2 rows in set (0.002 sec)
