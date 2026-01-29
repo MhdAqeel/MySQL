@@ -82,3 +82,29 @@ MariaDB [sample]> select * from customers;
 3	Grandma Kelly's	Regina Murphy	707 Oxford Rd.	Ann Arbor	48104	USA
 4	Cajun Delights	Jene Homestead	56 Gilbert St.	London	EC1 4SD	UK
 
+ MariaDB [sample]> create table Supliers(
+    -> SupplierID int not null auto_increment,
+    -> SupplierName varchar(50) not null,
+    -> ContactName varchar(50) not null,
+    -> Adress varchar(30) not null,
+    -> City varchar(45) not null,
+    -> PostalCode int not null,
+    -> Country varchar(30) not null,
+    -> primary key(SupplierID));
+Query OK, 0 rows affected (0.216 sec)
+
+MariaDB [sample]> load data local infile "C:/Users/dcsuser/Documents/2023csc099/Suplier.txt" into table Supliers;
+Query OK, 4 rows affected, 6 warnings (0.093 sec)
+Records: 4  Deleted: 0  Skipped: 0  Warnings: 6
+
+MariaDB [sample]> select * from Supliers;
++------------+-----------------+------------------+----------------+-------------+------------+---------+
+| SupplierID | SupplierName    | ContactName      | Adress         | City        | PostalCode | Country |
++------------+-----------------+------------------+----------------+-------------+------------+---------+
+     |     1 | Exotic Liquid   | Charlotte Cooper | 49 Gilbert St. | London      |          0 | UK
+    |      2 | New Orleans     | Shelley Burke    | P.O. Box 78934 | New Orleans |      70117 | USA
+    |      3 | Grandma Kelly's | Regina Murphy    | 707 Oxford Rd. | Ann Arbor   |      48104 | USA
+|          4 | Cajun Delights  | Jene Homestead   | 56 Gilbert St. | London      |          0 | UK      |
++------------+-----------------+------------------+----------------+-------------+------------+---------+
+4 rows in set (0.000 sec)
+
