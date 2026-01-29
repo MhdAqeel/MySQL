@@ -77,4 +77,8 @@ MariaDB [sample]> select * from customers;
 |          7 | Berglunds snabbop    | Cristina Berglunds | Bergusvagen 8        | Lulea       |      95822 | Sweden   |
 +------------+----------------------+--------------------+----------------------+-------------+------------+----------+
 7 rows in set (0.000 sec)
+1	Exotic Liquid	Charlotte Cooper	49 Gilbert St.	London	EC1 4SD	UK
+2	New Orleans	Shelley Burke	P.O. Box 78934	New Orleans	70117	USA
+3	Grandma Kelly's	Regina Murphy	707 Oxford Rd.	Ann Arbor	48104	USA
+4	Cajun Delights	Jene Homestead	56 Gilbert St.	London	EC1 4SD	UK
 
