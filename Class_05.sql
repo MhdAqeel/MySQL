@@ -235,6 +235,48 @@ MariaDB [school]> select distinct Salary from Staff;
 +--------+
 5 rows in set (0.001 sec)
 
+#############find the number of staffmrmbers in each department###############
+ 
+ MariaDB [School]> SELECT DNum, COUNT(*) AS Staff_Count
+    -> FROM Staff
+    -> GROUP BY DNum;
++------+-------------+
+| DNum | Staff_Count |
++------+-------------+
+|    4 |           1 |
+|    5 |           5 |
++------+-------------+
+2 rows in set (0.001 sec)
+
+
+##################dispaly total saary paid in each department#####################
+
+MariaDB [School]> SELECT DNum, SUM(Salary) AS Total_Salary
+    -> FROM Staff
+    -> GROUP BY DNum;
++------+--------------+
+| DNum | Total_Salary |
++------+--------------+
+|    4 |        25000 |
+|    5 |       176000 |
++------+--------------+
+2 rows in set (0.001 sec)
+
+ ###################find the average salary in each department##############
+
+ MariaDB [School]> SELECT DNum, AVG(Salary) AS Avg_Salary
+    -> FROM Staff
+    -> GROUP BY DNum;
++------+------------+
+| DNum | Avg_Salary |
++------+------------+
+|    4 | 25000.0000 |
+|    5 | 35200.0000 |
++------+------------+
+2 rows in set (0.001 sec)
+
+ 
+ 
 ###############dispaly staff full name along with salary ina single column###################
  
 MariaDB [school]> SELECT CONCAT(FName, ' ', LName, ' - ', Salary) AS Staff_Details
@@ -249,3 +291,36 @@ MariaDB [school]> SELECT CONCAT(FName, ' ', LName, ' - ', Salary) AS Staff_Detai
 | Jennifer Mercy - 43000 |
 | Alia Shed - 25000      |
 +------------------------+
+
+To display all staff working in department 5, just use a WHERE clause
+
+MariaDB [School]> SELECT *
+    -> FROM Staff
+    -> WHERE DNum = 5;
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 12345 | Jerrish  | Sharan |  30000 |    5 |
+| 33445 | Dinith   | Wreck  |  40000 |    5 |
+| 53453 | Joy      | Dilan  |  25000 |    5 |
+| 66884 | Ramya    | Naresh |  38000 |    5 |
+| 87654 | Jennifer | Mercy  |  43000 |    5 |
++-------+----------+--------+--------+------+
+5 rows in set (0.002 sec)
+
+#################dispaly staff details whose salary is between 25000 and 40000#################
+MariaDB [School]> SELECT *
+    -> FROM Staff
+    -> WHERE Salary BETWEEN 25000 AND 40000;
++-------+---------+--------+--------+------+
+| SSN   | FName   | LName  | Salary | DNum |
++-------+---------+--------+--------+------+
+| 12345 | Jerrish | Sharan |  30000 |    5 |
+| 33445 | Dinith  | Wreck  |  40000 |    5 |
+| 53453 | Joy     | Dilan  |  25000 |    5 |
+| 66884 | Ramya   | Naresh |  38000 |    5 |
+| 99887 | Alia    | Shed   |  25000 |    4 |
++-------+---------+--------+--------+------+
+5 rows in set (0.001 sec)
+
+################### 
