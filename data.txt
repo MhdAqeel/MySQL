@@ -1,0 +1,6 @@
+	Alfreds Futterkiste	Maria Anders	Obere Str. 57	Berlin	12209	Germany
+	Ana Trujilo Emparedados	Ana Trujilo	Avda. de la consitution 2222	Mexico D.D	05021	Mexico
+	Antonio moreno	Antonio Moreno	Mataderos 2312	Mexico D.F 	05023	Mexico
+	Helados Taqueria	Ana David	Obere Str .48	Berlin	25364	Germany
+	Around the Horn	Tomas Hardy	120 HAnover Sq	London	236	UK
+	Berglunds snabbop	Cristina Berglunds	Bergusvagen 8	Lulea	95822	Sweden
