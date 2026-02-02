@@ -13,3 +13,6 @@
 <li>CREATE INDEX - creates an index (search key)</li>
 <li>DROP INDEX - deletes an index</li>
 </ul>
+<hr>
+<h2><b>Some basic commands in my SQL  </b></h2>
+<hr>
