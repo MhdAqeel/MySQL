@@ -18,9 +18,12 @@
 <hr>
 <ul>
 <li>CREATE DATABASE database_name;</li>
-<li>CREATE TABLE table_name (column1 datatype PRIMARY KEY, column2 datatype, column3 datatype, ...);</li>
+<li>CREATE TABLE table_name (column1 datatype PRIMARY KEY, column2 datatype, column3 datatype, ... , foreign key (column) references other_table(other_column));</li>
 <li>describe table_name;</li>
 <li>INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);</li>
 <li>SELECT * FROM table_name;</li>
 <li>SELECT column1, column2, ... FROM table_name;</li>
+<li>SELECT distinct column_name from table_name;</li>
+<li>SELECT count(distinct column_name) from table_name;</li> //To count the number of unique values in a column
+<li>SELECT count(column_name) from table_name;</li> //To count the number of non-null values in a column
 </ul>
