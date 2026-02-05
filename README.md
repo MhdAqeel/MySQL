@@ -26,4 +26,16 @@
 <li>SELECT distinct column_name from table_name;</li>
 <li>SELECT count(distinct column_name) from table_name;</li> //To count the number of unique values in a column
 <li>SELECT count(column_name) from table_name;</li> //To count the number of non-null values in a column
+<li>SELECT * from where condition;</li>
+    <ul>Conditions:
+        <li> = : equal to</li>
+        <li> <> : not equal to</li>
+        <li> > : greater than</li>
+        <li> < : less than</li>
+        <li> >= : greater than or equal to</li>
+        <li> <= : less than or equal to</li>
+        <li> BETWEEN : between a certain range</li>
+        <li> LIKE : search for a pattern</li> //Wildcards: % (zero or more characters), _ (exactly one character)
+        <li> IN : specify multiple possible values for a column</li>// e.g., WHERE column_name IN (value1, value2, ...)</li>
+    </ul>
 </ul>
