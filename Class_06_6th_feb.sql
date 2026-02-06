@@ -68,4 +68,51 @@ insert into Customer_db values('4','Emily','Davis','Houston');
 insert into Customer_db values('5','David','Wilson','Phoenix');
 
 
-#########################################################################
+##############################  JOIN FUNCTION ###########################################
+
+MariaDB [new_db]> use university;
+Database changed
+MariaDB [university]> show tables;
++----------------------+
+| Tables_in_university |
++----------------------+
+| department           |
+| student              |
++----------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [university]> select * from department;
++---------+------------------+----------+
+| dept_id | dept_name        | building |
++---------+------------------+----------+
+|       1 | Computer Science | Block A  |
+|       2 | Mathematics      | Block B  |
+|       3 | Physics          | Block C  |
++---------+------------------+----------+
+3 rows in set (0.001 sec)
+
+MariaDB [university]> select * from student;
++------------+--------------+-----+-------+---------+
+| student_id | student_name | age | marks | dept_id |
++------------+--------------+-----+-------+---------+
+|        101 | Alice        |  20 |    85 |       1 |
+|        102 | Bob          |  22 |    78 |       1 |
+|        103 | Charlie      |  21 |    92 |       2 |
+|        104 | David        |  23 |    65 |       2 |
+|        105 | Eva          |  20 |    88 |       3 |
++------------+--------------+-----+-------+---------+
+5 rows in set (0.001 sec)
+
+MariaDB [university]> select student.student_id , student.student_name , department.dept_name from student
+    -> inner join department
+    -> on department.dept_id = student.dept_id;
++------------+--------------+------------------+
+| student_id | student_name | dept_name        |
++------------+--------------+------------------+
+|        101 | Alice        | Computer Science |
+|        102 | Bob          | Computer Science |
+|        103 | Charlie      | Mathematics      |
+|        104 | David        | Mathematics      |
+|        105 | Eva          | Physics          |
++------------+--------------+------------------+
+5 rows in set (0.012 sec)
