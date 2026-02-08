@@ -53,7 +53,7 @@ OFFSET number;</li>//The LIMIT clause is used to specify the maximum number of r
 <li>SELECT AVG(column_name)  AS average_value FROM table_name;</li>
 <li>SELECT SUM(column_name) AS total_value FROM table_name;</li>
 <li>SELECT column_name, COUNT(*) AS count FROM table_name GROUP BY column_name;</li> //AS command is optional
-<li>jOIN: combines rows from two or more tables based on a related column between them.<br>
+<li>JOIN: combines rows from two or more tables based on a related column between them.<br>
     <ul>
         <li>INNER JOIN: returns records that have matching values in both tables.</li>
         <li>LEFT JOIN (or LEFT OUTER JOIN): returns all records from the left table, and the matched records from the right table. If there is no match, the result is NULL on the right side.</li>
