@@ -285,4 +285,12 @@ MariaDB [student_enrolment_details]> select distinct s.student_name from student
 4 rows in set (0.001 sec)
 
 #########################find student who are not enrolled on any courses ###################################
+MariaDB [student_enrolment_details]> select s.student_name from student s left join enrolment e on s.student_id=e.student_id where e.student_id is null;
++--------------+
+| student_name |
++--------------+
+| Sara         |
++--------------+
+1 row in set (0.004 sec)
 
+###########################
