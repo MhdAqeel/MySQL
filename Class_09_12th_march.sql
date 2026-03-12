@@ -236,20 +236,124 @@ MariaDB [studentmanagementsystem]> select s.student_name from studentgrades g in
 4 rows in set (0.001 sec)
 
 ###################################### show all coures taken by john ################################################
-
+MariaDB [studentmanagementsystem]> SELECT c.course_name
+    -> FROM studentgrades g
+    -> INNER JOIN student s ON g.student_id = s.student_id
+    -> INNER JOIN course c ON g.course_id = c.course_id
+    -> WHERE s.student_name = 'John';
++-------------+
+| course_name |
++-------------+
+| SQL         |
+| Python      |
++-------------+
+2 rows in set (0.004 sec)
+    
 ###################################### student who got an A ################################################
+MariaDB [studentmanagementsystem]> SELECT s.student_name
+    -> FROM studentgrades g
+    -> INNER JOIN student s ON g.student_id = s.student_id
+    -> WHERE g.grade = 'A';
++--------------+
+| student_name |
++--------------+
+| John         |
+| John         |
+| Jane         |
++--------------+
+3 rows in set (0.001 sec)
+###################################### show the taecher on each course ################################################
 
-###################################### show the taecher od each course ################################################
-
+    MariaDB [studentmanagementsystem]> select teacher_name from teacher;
++--------------+
+| teacher_name |
++--------------+
+| Roger        |
+| Rafa         |
++--------------+
+2 rows in set (0.000 sec)
+    
 ###################################### count number of student in each course ################################################
 
+    MariaDB [studentmanagementsystem]> SELECT c.course_name, COUNT(g.student_id) AS student_count
+    -> FROM studentgrades g
+    -> INNER JOIN course c ON g.course_id = c.course_id
+    -> GROUP BY c.course_name;
++-------------+---------------+
+| course_name | student_count |
++-------------+---------------+
+| Python      |             3 |
+| SQL         |             4 |
++-------------+---------------+
+2 rows in set (0.005 sec)
+    
 ###################################### find students who enrolled in more than one course ################################################
 
+    MariaDB [studentmanagementsystem]> SELECT s.student_name, COUNT(g.course_id) AS course_count
+    -> FROM studentgrades g
+    -> INNER JOIN student s ON g.student_id = s.student_id
+    -> GROUP BY s.student_name
+    -> HAVING COUNT(g.course_id) > 1;
++--------------+--------------+
+| student_name | course_count |
++--------------+--------------+
+| Jane         |            2 |
+| John         |            2 |
+| Paul         |            2 |
++--------------+--------------+
+3 rows in set (0.004 sec)
+    
   ###################################### find the teacher email for sql course ################################################
-
-  ###################################### dispaly student name , course name and grade ################################################
-
+MariaDB [studentmanagementsystem]> SELECT t.teacher_email
+    -> FROM course c
+    -> INNER JOIN teacher t ON c.teacher_id = t.teacher_id
+    -> WHERE c.course_name = 'SQL';
++----------------------+
+| teacher_email        |
++----------------------+
+| Roger@teacher123.edu |
++----------------------+
+1 row in set (0.001 sec)
+  
+    ###################################### dispaly student name , course name and grade ################################################
+MariaDB [studentmanagementsystem]> SELECT s.student_name, c.course_name, g.grade
+    -> FROM studentgrades g
+    -> INNER JOIN student s ON g.student_id = s.student_id
+    -> INNER JOIN course c ON g.course_id = c.course_id;
++--------------+-------------+-------+
+| student_name | course_name | grade |
++--------------+-------------+-------+
+| John         | SQL         | A     |
+| Jane         | SQL         | B     |
+| Ron          | SQL         | C     |
+| Paul         | SQL         | C     |
+| John         | Python      | A     |
+| Jane         | Python      | A     |
+| Paul         | Python      | C     |
++--------------+-------------+-------+
+7 rows in set (0.001 sec)
 ###################################### find students who got c ################################################
-
+MariaDB [studentmanagementsystem]> SELECT s.student_name
+    -> FROM studentgrades g
+    -> INNER JOIN student s ON g.student_id = s.student_id
+    -> WHERE g.grade = 'C';
++--------------+
+| student_name |
++--------------+
+| Ron          |
+| Paul         |
+| Paul         |
++--------------+
+3 rows in set (0.001 sec)
   ###################################### dispaly all teachers and thir courses ################################################
-
+MariaDB [studentmanagementsystem]> SELECT t.teacher_name, c.course_name
+    -> FROM teacher t
+    -> INNER JOIN course c ON t.teacher_id = c.teacher_id;
++--------------+-------------+
+| teacher_name | course_name |
++--------------+-------------+
+| Roger        | SQL         |
+| Rafa         | Python      |
++--------------+-------------+
+2 rows in set (0.001 sec)
+    
