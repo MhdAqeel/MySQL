@@ -151,32 +151,189 @@ Query OK, 5 rows affected (0.003 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
 ############################### Display all customers ###################################
-
+MariaDB [erexersise]> SELECT *
+    -> FROM customer;
++--------+-------------+-------------+--------+
+| Cus_id | name        | address     | city   |
++--------+-------------+-------------+--------+
+| C0001  | Ali Ahmed   | 12 King St  | Riyadh |
+| C0002  | Sara Noor   | 45 Palm Ave | Jeddah |
+| C0003  | Omar Hassan | 7 Lake Rd   | Dammam |
+| C0004  | Mona Saleh  | 99 River Dr | Tabuk  |
+| C0005  | Yousef Khan | 18 Hill St  | Abha   |
++--------+-------------+-------------+--------+
+5 rows in set (0.010 sec)
 ############################### Display all cars with customer names ###################################
-
+MariaDB [erexersise]> SELECT
+    ->   ca.car_id,
+    ->   ca.serial_no,
+    ->   ca.model_no,
+    ->   ca.color,
+    ->   ca.year,
+    ->   c.Cus_id,
+    ->   c.name AS customer_name
+    -> FROM Car ca
+    -> JOIN customer c ON c.Cus_id = ca.Cus_id;
++--------+-----------+----------+-------+------+--------+---------------+
+| car_id | serial_no | model_no | color | year | Cus_id | customer_name |
++--------+-----------+----------+-------+------+--------+---------------+
+|      1 | SN-10001  | MDL-A1   | Red   | 2019 | C0001  | Ali Ahmed     |
+|      2 | SN-10002  | MDL-B2   | Blue  | 2020 | C0002  | Sara Noor     |
+|      3 | SN-10003  | MDL-C3   | Black | 2018 | C0003  | Omar Hassan   |
+|      4 | SN-10004  | MDL-D4   | White | 2021 | C0004  | Mona Saleh    |
+|      5 | SN-10005  | MDL-E5   | Gray  | 2017 | C0005  | Yousef Khan   |
++--------+-----------+----------+-------+------+--------+---------------+
+5 rows in set (0.013 sec)
 ############################### Display employees and their qualifications. ###################################
-
+MariaDB [erexersise]> SELECT
+    ->   e.Emp_id,
+    ->   e.name AS employee_name,
+    ->   q.qualification
+    -> FROM employee e
+    -> JOIN emplpyee_qualification q ON q.Emp_id = e.Emp_id
+    -> ORDER BY e.Emp_id, q.qualification;
++--------+---------------+---------------+
+| Emp_id | employee_name | qualification |
++--------+---------------+---------------+
+| E0001  | Hadi Ibrahim  | Electrician   |
+| E0001  | Hadi Ibrahim  | Mechanic      |
+| E0002  | Lina Faris    | Electrician   |
+| E0003  | Khalid Younis | Inspector     |
+| E0003  | Khalid Younis | Painter       |
+| E0004  | Reem Adel     | Painter       |
+| E0005  | Fahad Nasser  | Supervisor    |
++--------+---------------+---------------+
+7 rows in set (0.014 sec)
 ############################### Find cars manufactured after 2020. ###################################
-
+MariaDB [erexersise]> SELECT *
+    -> FROM Car
+    -> WHERE year > 2020;
++--------+-----------+----------+-------+------+--------+--------+
+| car_id | serial_no | model_no | color | year | Cus_id | Emp_id |
++--------+-----------+----------+-------+------+--------+--------+
+|      4 | SN-10004  | MDL-D4   | White | 2021 | C0004  | E0004  |
++--------+-----------+----------+-------+------+--------+--------+
+1 row in set (0.010 sec)
 ############################### Find customers from Jaffna ###################################
-
+MariaDB [erexersise]> SELECT *
+    -> FROM customer
+    -> WHERE city = 'Jaffna';
+Empty set (0.001 sec)
 ############################### Count total customers. ###################################
-
+MariaDB [erexersise]> SELECT COUNT(*) AS total_customers
+    -> FROM customer;
++-----------------+
+| total_customers |
++-----------------+
+|               5 |
++-----------------+
+1 row in set (0.003 sec)
 ############################### Update customer phone number. ###################################
 
 ############################### Count how many cars are sold by each employee ###################################
-
+MariaDB [erexersise]> SELECT
+    ->   e.Emp_id,
+    ->   e.name AS employee_name,
+    ->   COUNT(ca.car_id) AS cars_sold
+    -> FROM employee e
+    -> LEFT JOIN Car ca ON ca.Emp_id = e.Emp_id
+    -> GROUP BY e.Emp_id, e.name
+    -> ORDER BY cars_sold DESC;
++--------+---------------+-----------+
+| Emp_id | employee_name | cars_sold |
++--------+---------------+-----------+
+| E0005  | Fahad Nasser  |         1 |
+| E0003  | Khalid Younis |         1 |
+| E0001  | Hadi Ibrahim  |         1 |
+| E0004  | Reem Adel     |         1 |
+| E0002  | Lina Faris    |         1 |
++--------+---------------+-----------+
+5 rows in set (0.001 sec)
 ############################### Count customers in each city. ###################################
-
+MariaDB [erexersise]> SELECT
+    ->   city,
+    ->   COUNT(*) AS customer_count
+    -> FROM customer
+    -> GROUP BY city
+    -> ORDER BY customer_count DESC, city;
++--------+----------------+
+| city   | customer_count |
++--------+----------------+
+| Abha   |              1 |
+| Dammam |              1 |
+| Jeddah |              1 |
+| Riyadh |              1 |
+| Tabuk  |              1 |
++--------+----------------+
+5 rows in set (0.001 sec)
 ############################### Display all customers ordered by name. ###################################
-
+MariaDB [erexersise]> SELECT *
+    -> FROM customer
+    -> ORDER BY name ASC;
++--------+-------------+-------------+--------+------------+
+| Cus_id | name        | address     | city   | phone      |
++--------+-------------+-------------+--------+------------+
+| C0001  | Ali Ahmed   | 12 King St  | Riyadh | 0501234567 |
+| C0004  | Mona Saleh  | 99 River Dr | Tabuk  | NULL       |
+| C0003  | Omar Hassan | 7 Lake Rd   | Dammam | NULL       |
+| C0002  | Sara Noor   | 45 Palm Ave | Jeddah | NULL       |
+| C0005  | Yousef Khan | 18 Hill St  | Abha   | NULL       |
++--------+-------------+-------------+--------+------------+
+5 rows in set (0.001 sec)
 ############################### Find customers who are from Sri Lanka and city Jaffna ###################################
-
+MariaDB [erexersise]> SELECT *
+    -> FROM customer
+    -> WHERE country = 'Sri Lanka'
+    ->   AND city = 'Jaffna';
+Empty set (0.003 sec)
 ############################### Find cars manufactured between 2018 and 2023. ###################################
-
+MariaDB [erexersise]> SELECT *
+    -> FROM Car
+    -> WHERE year BETWEEN 2018 AND 2023;
++--------+-----------+----------+-------+------+--------+--------+
+| car_id | serial_no | model_no | color | year | Cus_id | Emp_id |
++--------+-----------+----------+-------+------+--------+--------+
+|      1 | SN-10001  | MDL-A1   | Red   | 2019 | C0001  | E0001  |
+|      2 | SN-10002  | MDL-B2   | Blue  | 2020 | C0002  | E0002  |
+|      3 | SN-10003  | MDL-C3   | Black | 2018 | C0003  | E0003  |
+|      4 | SN-10004  | MDL-D4   | White | 2021 | C0004  | E0004  |
++--------+-----------+----------+-------+------+--------+--------+
+4 rows in set (0.003 sec)
 ############################### Find employees whose name ends with “n”. ###################################
-
+MariaDB [erexersise]> SELECT *
+    -> FROM employee
+    -> WHERE name LIKE '%n';
+Empty set (0.001 sec)
 ############################### Display car model, customer name, and employee name ###################################
-
+MariaDB [erexersise]> SELECT
+    ->   ca.model_no,
+    ->   c.name AS customer_name,
+    ->   e.name AS employee_name
+    -> FROM Car ca
+    -> JOIN customer c ON c.Cus_id = ca.Cus_id
+    -> JOIN employee e ON e.Emp_id = ca.Emp_id;
++----------+---------------+---------------+
+| model_no | customer_name | employee_name |
++----------+---------------+---------------+
+| MDL-A1   | Ali Ahmed     | Hadi Ibrahim  |
+| MDL-B2   | Sara Noor     | Lina Faris    |
+| MDL-C3   | Omar Hassan   | Khalid Younis |
+| MDL-D4   | Mona Saleh    | Reem Adel     |
+| MDL-E5   | Yousef Khan   | Fahad Nasser  |
++----------+---------------+---------------+
+5 rows in set (0.001 sec)
 ############################### Display the first 5 customers ###################################
-
+MariaDB [erexersise]> SELECT *
+    -> FROM customer
+    -> ORDER BY Cus_id
+    -> LIMIT 5;
++--------+-------------+-------------+--------+------------+-----------+
+| Cus_id | name        | address     | city   | phone      | country   |
++--------+-------------+-------------+--------+------------+-----------+
+| C0001  | Ali Ahmed   | 12 King St  | Riyadh | 0501234567 | Sri Lanka |
+| C0002  | Sara Noor   | 45 Palm Ave | Jeddah | NULL       | NULL      |
+| C0003  | Omar Hassan | 7 Lake Rd   | Dammam | NULL       | NULL      |
+| C0004  | Mona Saleh  | 99 River Dr | Tabuk  | NULL       | NULL      |
+| C0005  | Yousef Khan | 18 Hill St  | Abha   | NULL       | NULL      |
++--------+-------------+-------------+--------+------------+-----------+
+5 rows in set (0.001 sec)
