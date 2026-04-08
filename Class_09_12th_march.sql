@@ -65,7 +65,7 @@ MariaDB [studentmanagementsystem]> select * from course;
 2 rows in set (0.006 sec)
 
 MariaDB [studentmanagementsystem]> select * from sudent;
-ERROR 1146 (42S02): Table 'studentmanagementsystem.sudent' doesn't exist
+ERROR 1146 (42S02): Table studentmanagementsystem.sudent' doesn't exist
 MariaDB [studentmanagementsystem]> select * from student;
 +------------+--------------+
 | student_id | student_name |
