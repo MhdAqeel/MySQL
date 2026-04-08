@@ -269,14 +269,14 @@ MariaDB [pscompany]> select * from products where name in ('pen red' , 'pen blac
 | 1003 | PEN  | Pen Black |     2000 |  1.25 |
 +------+------+-----------+----------+-------+
 2 rows in set (0.001 sec)
-
-MariaDB [pscompany]> select * from products where name in ('pen red' , 'pen black') ;
-+------+------+-----------+----------+-------+
-| ID   | code | name      | quantity | price |
-+------+------+-----------+----------+-------+
-| 1001 | PEN  | Pen Red   |     5000 |  1.23 |
-| 1003 | PEN  | Pen Black |     2000 |  1.25 |
-+------+------+-----------+----------+-------+
+*****************************************************************************************
+MariaDB [pscompany]> select * from products where name in ('pen red' , 'pen black') ;    *
++------+------+-----------+----------+-------+                                           *
+| ID   | code | name      | quantity | price |                                           *
++------+------+-----------+----------+-------+                                           *
+| 1001 | PEN  | Pen Red   |     5000 |  1.23 |                                           *
+| 1003 | PEN  | Pen Black |     2000 |  1.25 |                                           *
++------+------+-----------+----------+-------+                                           *
 2 rows in set (0.001 sec)
 
 MariaDB [pscompany]> select * from products where price between 1.25 and 2.0 ;
